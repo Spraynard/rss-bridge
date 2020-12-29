@@ -68,7 +68,7 @@ class ReutersBridge extends BridgeAbstract
 					'World' => 'world',
 					'Politics' => 'politics',
 					'Science' => 'science',
-					'Lifestyle' => 'life',
+					'Lifestyle' => 'lifestyle',
 					'Energy' => 'energy',
 					'Aerospace and Defence' => 'aerospace',
 					'Special Reports' => 'special-reports',
@@ -76,7 +76,8 @@ class ReutersBridge extends BridgeAbstract
 					'Markets' => 'markets',
 					'Sports' => 'sports',
 					'UK' => 'uk',
-					'Entertainment' => 'entertainment'
+					'Entertainment' => 'entertainment',
+					'Environment' => 'environment'
 				),
 			),
 		),
