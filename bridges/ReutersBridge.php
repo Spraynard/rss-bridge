@@ -61,7 +61,7 @@ class ReutersBridge extends BridgeAbstract
 				'values' => array(
 					'Tech' => 'tech',
 					'Wire' => 'wire',
-					'Health' => 'id-chan:8hw7807a',
+					'Health' => 'chan:8hw7807a',
 					'Business' => 'business',
 					'World' => 'world',
 					'Politics' => 'politics',
@@ -239,9 +239,8 @@ class ReutersBridge extends BridgeAbstract
 				break;
 		}
 
-		if(strpos($reuters_feed_name, 'id') !== false) {
+		if(strpos($reuters_feed_name, 'chan') !== false) {
 			// Now checking whether that feed has unique ID or not.
-			$reuters_feed_name = explode("id-", $reuters_feed_name)[1];
 			$feed_uri = "/feed/rapp/$reuters_feed_region/wirefeed/$reuters_feed_name";
 		} else {
 			$feed_uri = "/feed/rapp/$reuters_feed_region/tabbar/feeds/$reuters_feed_name";
