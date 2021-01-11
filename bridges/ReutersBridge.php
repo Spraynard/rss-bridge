@@ -61,7 +61,7 @@ class ReutersBridge extends BridgeAbstract
 				'values' => array(
 					'Tech' => 'tech',
 					'Wire' => 'wire',
-					'Health' => 'health',
+					'Health' => 'id-chan:8hw7807a',
 					'Business' => 'business',
 					'World' => 'world',
 					'Politics' => 'politics',
@@ -239,9 +239,16 @@ class ReutersBridge extends BridgeAbstract
 				break;
 		}
 
-		$feed_uri = "/feed/rapp/$reuters_feed_region/tabbar/feeds/$reuters_feed_name";
+		if(strpos($reuters_feed_name, 'id') !== false) {
+			// Now checking whether that feed has unique ID or not.
+			$reuters_feed_name = explode("id-", $reuters_feed_name)[1];
+			$feed_uri = "/feed/rapp/$reuters_feed_region/wirefeed/$reuters_feed_name";
+		} else {
+			$feed_uri = "/feed/rapp/$reuters_feed_region/tabbar/feeds/$reuters_feed_name";
+		}
 
 		$data = $this->getJson($feed_uri);
+
 		$reuters_wireitems = $data['wireitems'];
 		$this->feedName = $data['wire_name'] . ' | Reuters';
 		$processedData = $this->processData($reuters_wireitems);
