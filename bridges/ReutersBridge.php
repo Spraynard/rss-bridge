@@ -239,7 +239,7 @@ class ReutersBridge extends BridgeAbstract
 				break;
 		}
 
-		if(strpos($reuters_feed_name, 'chan') !== false) {
+		if(strpos($reuters_feed_name, 'chan:') !== false) {
 			// Now checking whether that feed has unique ID or not.
 			$feed_uri = "/feed/rapp/$reuters_feed_region/wirefeed/$reuters_feed_name";
 		} else {
