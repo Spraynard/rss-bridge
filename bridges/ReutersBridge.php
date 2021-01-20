@@ -24,37 +24,9 @@ class ReutersBridge extends BridgeAbstract
 		'story'
 	);
 
-	const FEED_REGION_VALUE_US = 'us';
-	const FEED_REGION_VALUE_UK = 'uk';
-
 	const PARAMETERS = array(
-		'United Kingdom' => array(
-			'feed_uk' => array(
-				'name' => 'News Feed',
-				'type' => 'list',
-				'title' => 'Feeds from Reuters U.K edition',
-				'values' => array(
-					'Tech' => 'tech',
-					'Wire' => 'wire',
-					'Business' => 'business',
-					'World' => 'world',
-					'Politics' => 'politics',
-					'Science' => 'science',
-					'Energy' => 'energy',
-					'Aerospace and Defense' => 'aerospace',
-					'Special Reports' => 'special-reports',
-					'Top News' => 'home/topnews',
-					'Markets' => 'markets',
-					'Sports' => 'sports',
-					'UK' => 'uk',
-					'Entertainment' => 'entertainment',
-					'Environment' => 'environment',
-					'Lifestyle' => 'lifestyle',
-				)
-			)
-		),
-		'United States' => array(
-			'feed_us' => array(
+		array(
+			'feed' => array(
 				'name' => 'News Feed',
 				'type' => 'list',
 				'title' => 'Feeds from Reuters U.S/International edition',
@@ -75,6 +47,9 @@ class ReutersBridge extends BridgeAbstract
 					'Markets' => 'markets',
 					'Sports' => 'sports',
 					'USA News' => 'us',
+					'UK' => 'chan:61leiu7j',
+					'Entertainment' => 'chan:8ym8q8dl',
+					'Environment' => 'chan:6u4f0jgs',
 				)
 			)
 		)
@@ -225,25 +200,13 @@ class ReutersBridge extends BridgeAbstract
 
 	public function collectData()
 	{
-		$reuters_feed_name = null;
-		$reuters_feed_region = null;
-
-		switch ($this->queriedContext) {
-			case 'United Kingdom':
-				$reuters_feed_name = $this->getInput('feed_uk');
-				$reuters_feed_region = self::FEED_REGION_VALUE_UK;
-				break;
-			case 'United States':
-				$reuters_feed_name = $this->getInput('feed_us');
-				$reuters_feed_region = self::FEED_REGION_VALUE_US;
-				break;
-		}
+		$reuters_feed_name = $this->getInput('feed');
 
 		if(strpos($reuters_feed_name, 'chan:') !== false) {
 			// Now checking whether that feed has unique ID or not.
-			$feed_uri = "/feed/rapp/$reuters_feed_region/wirefeed/$reuters_feed_name";
+			$feed_uri = "/feed/rapp/us/wirefeed/$reuters_feed_name";
 		} else {
-			$feed_uri = "/feed/rapp/$reuters_feed_region/tabbar/feeds/$reuters_feed_name";
+			$feed_uri = "/feed/rapp/us/tabbar/feeds/$reuters_feed_name";
 		}
 
 		$data = $this->getJson($feed_uri);
